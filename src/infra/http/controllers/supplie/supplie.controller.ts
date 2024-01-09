@@ -12,15 +12,14 @@ import {
   Delete,
 } from '@nestjs/common';
 
-@Controller('supplies')
+@Controller('supplier')
 export class SupplieController {
   constructor(private productService: SupplieService) {}
 
   @Post('create')
   async create(@Body() createSupplieDTO: createSupplieDTO) {
-    const id = await this.productService.create(createSupplieDTO);
-
-    if (id instanceof Error) throw new BadRequestException(id.message);
+    const supplie = await this.productService.create(createSupplieDTO);
+    if (supplie instanceof Error) throw new BadRequestException(supplie.message);
 
     return { message: 'Produto cadastrado com sucesso!' };
   }
@@ -49,7 +48,7 @@ export class SupplieController {
   @Delete(':id/delete')
   async delete(@Param('id') id: string) {
     const product = await this.productService.deleteSupplie(id);
-
-    return product;
+   if (product instanceof Error) throw new BadRequestException("Erro ao deletar produto!");
+    return "Produto deletado com sucesso!"
   }
 }
