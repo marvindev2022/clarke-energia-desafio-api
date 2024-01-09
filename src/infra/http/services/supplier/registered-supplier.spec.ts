@@ -2,9 +2,9 @@ import { inMemorySupplierRepository } from '@test/repositories/in-memory-supplie
 import { SupplieService } from './supplier.service';
 
 describe('Supplie', () => {
-  it('should register a new product', async () => {
-    const productRepository = new inMemorySupplierRepository();
-    const productService = new SupplieService(productRepository);
+  it('should register a new supplie', async () => {
+    const supplieRepository = new inMemorySupplierRepository();
+    const supplieService = new SupplieService(supplieRepository);
 
     const newSupplie = {
       name: 'any_name',
@@ -14,8 +14,8 @@ describe('Supplie', () => {
       quantity: 10,
     };
 
-    const product = await productService.create(newSupplie);
+    const supplie = await supplieService.create(newSupplie);
 
-    expect(productRepository.supplies[0]).toBe(product);
+    expect(supplieRepository.supplies[0]).toBe(supplie);
   });
 });
