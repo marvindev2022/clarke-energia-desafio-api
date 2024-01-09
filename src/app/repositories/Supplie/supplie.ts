@@ -1,7 +1,10 @@
+import { EditSupplieDTO } from "@infra/http/models/Supplie/edit";
+import Supplie from "@domain/Supplier/supplie";
+
 export abstract class SupplieRepository {
-  abstract getSupplier(): Promise<any[]>;
-  abstract getSupplieById(id: string): Promise<any>;
-  abstract createSupplie(product: any): Promise<any>;
-  abstract updateSupplie(id: string, product: any): Promise<any>;
-  abstract deleteSupplie(id: string): Promise<any>;
+  abstract createSupplie(supplie: Supplie): Promise<string>;
+  abstract getSupplier(): Promise<Supplie[]>;
+  abstract getSupplieById(id: string): Promise<Supplie>;
+  abstract updateSupplie(id: string, supplie: EditSupplieDTO): Promise<EditSupplieDTO>;
+  abstract deleteSupplie(id: string): Promise<string>;
 }
