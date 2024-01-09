@@ -14,8 +14,8 @@ export class SupplieService {
     return await this.supplieRepository.getSupplieById(id);
   }
 
-  async create(supplie: any ): Promise<any> {
-    const newSupplie = new Supplie(supplie)
+  async create(supplie: any): Promise<any> {
+    const newSupplie = new Supplie(supplie);
     return await this.supplieRepository.createSupplie(newSupplie);
   }
 
@@ -24,6 +24,10 @@ export class SupplieService {
   }
 
   async deleteSupplie(id: string): Promise<any> {
-    return await this.supplieRepository.deleteSupplie(id);
+    const response:any = await this.supplieRepository.deleteSupplie(id);
+    if (response instanceof Error) {
+      throw new Error(response.message);
+    }
+    return response;
   }
 }
