@@ -34,9 +34,8 @@ export class Supplie {
   props: SupplieProps;
 
   constructor(props: SupplieProps) {
-    const { ...productProps } = props;
-
-    const newSupplie = this.handle(productProps);
+    const { ...supplieProps } = props;
+    const newSupplie = this.handle(supplieProps);
 
     if (newSupplie.statusCode >= 300) {
       throw newSupplie.body;
@@ -63,43 +62,36 @@ export class Supplie {
   }
 
   private isValid(params: SupplieCreationProps): IsValidMethodReturn {
-    const productSchema = z.object({
-      name: z.string().min(3).max(255),
-      logo: z.string().min(3).max(255),
-      stateAbbreviation: z.string().min(2).max(2),
-      costPerKwh: z.number().min(0),
-      minKwhLimit: z.number().min(0),
-      totalCustomers: z.number().min(0),
-      averageCustomerRating: z.number().min(0),
+    const supplieSchema = z.object({
+      name: z.string().min(3, { message: 'Invalid' }).max(255),
+      logo: z.string().min(3, { message: 'Invalid' }).max(255),
+      stateAbbreviation: z.string().min(2, { message: 'Invalid' }).max(2),
+      costPerKwh: z.number().min(0, { message: 'Invalid' }),
+      minKwhLimit: z.number().min(0, { message: 'Invalid' }),
+      totalCustomers: z.number().min(0, { message: 'Invalid' }),
+      averageCustomerRating: z.number().min(0, { message: 'Invalid' }),
     });
-    try {
-      const productIsValid = productSchema.safeParse(params);
-      if (!productIsValid.success) {
-        const errorPath = productIsValid.error.issues[0].path[0].toString();
-        const errorMessage = productIsValid.error.issues[0].message;
-        const errorBody =
-          errorMessage === 'Invalid'
-            ? new InvalidParamError(errorPath)
-            : new MissingParamError(errorPath);
 
-        return {
-          isValid: false,
-          body: errorBody,
-          statusCode: 400,
-        };
-      }
-      return {
-        isValid: true,
-        body: null,
-        statusCode: 200,
-      };
-    } catch (err) {
+    const supplieIsValid = supplieSchema.safeParse(params);
+    if (!supplieIsValid.success) {
+      const errorPath = supplieIsValid.error.issues[0].path[0].toString();
+      const errorMessage = supplieIsValid.error.issues[0].message;
+      const errorBody =
+        errorMessage === 'Invalid'
+          ? new InvalidParamError(errorPath)
+          : new MissingParamError(errorPath);
+
       return {
         isValid: false,
-        body: err,
+        body: errorBody,
         statusCode: 400,
       };
     }
+    return {
+      isValid: true,
+      body: null,
+      statusCode: 200,
+    };
   }
 }
 export default Supplie;
