@@ -12,69 +12,131 @@ describe('Supplie', () => {
   it('should throw missing error param if none name is provided', () => {
     const httpRequest = {
       body: {
-        price: 10,
-        description: 'any_description',
-        image: 'any_image',
-        quantity: 10,
+      logo: "any_string",
+      stateAbbreviation: "sp",
+      costPerKwh: 3,
+      minKwhLimit: 3,
+      totalCustomers: 3,
+      averageCustomerRating: 3,
       },
     };
 
-    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('name'));
-  });
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('name')); 
+})
 
-  it('should throw missing error param if none price is provided', () => {
+  it('should throw missing error param if none logo is provided', () => {
     const httpRequest = {
       body: {
-        name: 'any_name',
-        description: 'any_description',
-        image: 'any_image',
-        quantity: 10,
+      name: "any_string",
+      stateAbbreviation: "sp",
+      costPerKwh: 3,
+      minKwhLimit: 3,
+      totalCustomers: 3,
+      averageCustomerRating: 3,
       },
     };
 
-    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('price'));
-  });
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('logo')); 
+})
 
-  it('should throw missing error param if none description is provided', () => {
+  it('should throw missing error param if none stateAbbreviation is provided', () => {
     const httpRequest = {
       body: {
-        name: 'any_name',
-        price: 10,
-        image: 'any_image',
-        quantity: 10,
+      name: "any_string",
+      logo: "any_string",
+      costPerKwh: 3,
+      minKwhLimit: 3,
+      totalCustomers: 3,
+      averageCustomerRating: 3,
       },
     };
 
-    expect(() => makeSut(httpRequest)).toThrow(
-      new MissingParamError('description'),
-    );
-  });
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('stateAbbreviation')); 
+})
 
-  it('should throw missing error param if none image is provided', () => {
+  it('should throw missing error param if none costPerKwh is provided', () => {
     const httpRequest = {
       body: {
-        name: 'any_name',
-        price: 10,
-        description: 'any_description',
-        quantity: 10,
+      name: "any_string",
+      logo: "any_string",
+      stateAbbreviation: "sp",
+      minKwhLimit: 3,
+      totalCustomers: 3,
+      averageCustomerRating: 3,
       },
     };
 
-    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('image'));
-  });
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('costPerKwh')); 
+})
 
-  it('should throw missing error param if none quantity is provided', () => {
+  it('should throw missing error param if none minKwhLimit is provided', () => {
     const httpRequest = {
       body: {
-        name: 'any_name',
-        price: 10,
-        description: 'any_description',
-        image: 'any_image',
+      name: "any_string",
+      logo: "any_string",
+      stateAbbreviation: "sp",
+      costPerKwh: 3,
+      totalCustomers: 3,
+      averageCustomerRating: 3,
       },
     };
 
-    expect(() => makeSut(httpRequest)).toThrow(
-      new MissingParamError('quantity'),
-    );
-  });
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('minKwhLimit')); 
+})
+
+  it('should throw missing error param if none totalCustomers is provided', () => {
+    const httpRequest = {
+      body: {
+      name: "any_string",
+      logo: "any_string",
+      stateAbbreviation: "sp",
+      costPerKwh: 3,
+      minKwhLimit: 3,
+      averageCustomerRating: 3,
+      },
+    };
+
+    expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('totalCustomers'));
 });
+  
+    it('should throw missing error param if none averageCustomerRating is provided', () => {
+      const httpRequest = {
+        body: {
+        name: "any_string",
+        logo: "any_string",
+        stateAbbreviation: "sp",
+        costPerKwh: 3,
+        minKwhLimit: 3,
+        totalCustomers: 3,
+        },
+      };
+  
+      expect(() => makeSut(httpRequest)).toThrow(new MissingParamError('averageCustomerRating'));
+  });
+  
+    it('should return a new supplie if all params are provided', () => {
+      const httpRequest = {
+        body: {
+        name: "any_string",
+        logo: "any_string",
+        stateAbbreviation: "sp",
+        costPerKwh: 3,
+        minKwhLimit: 3,
+        totalCustomers: 3,
+        averageCustomerRating: 3,
+        },
+      };
+  
+      const newSupplie = makeSut(httpRequest)
+  
+      expect(newSupplie.props).toEqual({
+        averageCustomerRating: httpRequest.body.averageCustomerRating,
+        costPerKwh: httpRequest.body.costPerKwh,
+        logo: httpRequest.body.logo,
+        minKwhLimit: httpRequest.body.minKwhLimit,
+        name: httpRequest.body.name,
+        stateAbbreviation: httpRequest.body.stateAbbreviation,
+        totalCustomers: httpRequest.body.totalCustomers,
+      });
+    });
+  });
