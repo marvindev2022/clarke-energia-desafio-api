@@ -5,10 +5,12 @@ import { z } from 'zod';
 interface SupplieCreationProps {
   id?: string;
   name: string;
-  price: number;
-  description: string;
-  image: string;
-  quantity: number;
+  logo: string;
+  stateAbbreviation: string;
+  costPerKwh: number;
+  minKwhLimit: number;
+  totalCustomers: number;
+  averageCustomerRating: number;
 }
 
 interface SupplieProps extends SupplieCreationProps {
@@ -63,10 +65,12 @@ export class Supplie {
   private isValid(params: SupplieCreationProps): IsValidMethodReturn {
     const productSchema = z.object({
       name: z.string().min(3).max(255),
-      price: z.number().min(0),
-      description: z.string().min(3).max(255),
-      image: z.string().min(3).max(255),
-      quantity: z.number().min(0),
+      logo: z.string().min(3).max(255),
+      stateAbbreviation: z.string().min(2).max(2),
+      costPerKwh: z.number().min(0),
+      minKwhLimit: z.number().min(0),
+      totalCustomers: z.number().min(0),
+      averageCustomerRating: z.number().min(0),
     });
     try {
       const productIsValid = productSchema.safeParse(params);
