@@ -6,6 +6,9 @@ export class inMemorySupplierRepository implements SupplieRepository{
 
      async createSupplie(supplie: any): Promise<any> {
           this.supplies.push(supplie);
+          if (supplie instanceof Error) {
+               throw new Error(supplie.message);
+          }
           return supplie;
      }
 
@@ -14,6 +17,9 @@ export class inMemorySupplierRepository implements SupplieRepository{
      }
 
      async getSupplieById(id: string): Promise<any> {
+          if (!id) {
+               throw new Error("Id não informado");
+          }
           return this.supplies.find((supplie) => supplie.id === id);
      }
 
