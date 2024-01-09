@@ -18,7 +18,7 @@ export class PrismaSupplierRepository implements SupplieRepository {
   constructor(private prisma: PrismaService) {}
 
   async createSupplie(supplie: Supplie): Promise<string> {
-    console.log(supplie)
+   
     try {
       if (supplie instanceof Error) {
         throw new BadRequestException(supplie.message, {
