@@ -5,7 +5,7 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { SupplieController } from './supplie.controller';
-import { SupplieService } from '@infra/http/services/supplier/supplier.service';
+import { SupplieService } from '@infra/http/services/supplier.service';
 import { SupplierDatabaseModule } from '@infra/database/prisma/repositories/prisma-supplies-database.module';
 
 @Module({

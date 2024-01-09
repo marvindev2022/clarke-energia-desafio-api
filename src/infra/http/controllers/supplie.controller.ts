@@ -1,6 +1,6 @@
-import { createSupplieDTO } from '@infra/http/models/Supplie/create';
-import { EditSupplieDTO } from '@infra/http/models/Supplie/edit';
-import { SupplieService } from '@infra/http/services/supplier/supplier.service';
+import { createSupplieDTO } from '@infra/http/models/create';
+import { EditSupplieDTO } from '@infra/http/models/edit';
+import { SupplieService } from '@infra/http/services/supplier.service';
 import {
   BadRequestException,
   Body,

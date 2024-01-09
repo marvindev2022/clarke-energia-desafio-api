@@ -1,5 +1,5 @@
-import { SupplieRepository } from '@app/repositories/Supplie/supplie';
-import Supplie from '@domain/Supplier/supplie';
+import { SupplieRepository } from '@app/repositories/supplie';
+import Supplie from '@domain/supplie';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class SupplieService {
   }
 
   async deleteSupplie(id: string): Promise<any> {
-    const response:any = await this.supplieRepository.deleteSupplie(id);
+    const response: any = await this.supplieRepository.deleteSupplie(id);
     if (response instanceof Error) {
       throw new Error(response.message);
     }

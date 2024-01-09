@@ -1,4 +1,4 @@
-import { SupplieRepository } from '@app/repositories/Supplie/supplie';
+import { SupplieRepository } from '@app/repositories/supplie';
 
 export class inMemorySupplierRepository implements SupplieRepository {
   supplies: any[] = [];

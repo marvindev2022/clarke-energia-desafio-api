@@ -1,7 +1,7 @@
-import { SupplieRepository } from '@app/repositories/Supplie/supplie';
+import { SupplieRepository } from '@app/repositories/supplie';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import Supplie from '@domain/Supplier/supplie';
+import Supplie from '@domain/supplie';
 export interface SupplieGet {
   id: string;
   name: string;
@@ -53,18 +53,17 @@ export class PrismaSupplierRepository implements SupplieRepository {
   }
 
   async getSupplieById(id: string): Promise<any> {
-    try{
-    const supplie = await this.prisma.supplier.findUnique({
-      where: { id },
-    });
+    try {
+      const supplie = await this.prisma.supplier.findUnique({
+        where: { id },
+      });
 
-    if(!supplie?.id){
-     return []
-    }
-   return supplie
-  
-  }catch(error:any){
-      throw new BadRequestException('Fornecedor não encontrado!')
+      if (!supplie?.id) {
+        return [];
+      }
+      return supplie;
+    } catch (error: any) {
+      throw new BadRequestException('Fornecedor não encontrado!');
     }
   }
 
@@ -89,7 +88,7 @@ export class PrismaSupplierRepository implements SupplieRepository {
         where: { id },
       });
     } catch (error: any) {
-      throw new BadRequestException("Erro ao deletar fornecedor!");
+      throw new BadRequestException('Erro ao deletar fornecedor!');
     }
   }
 }
