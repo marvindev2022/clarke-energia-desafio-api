@@ -18,7 +18,6 @@ export class PrismaSupplierRepository implements SupplieRepository {
   constructor(private prisma: PrismaService) {}
 
   async createSupplie(supplie: Supplie): Promise<string> {
-   
     try {
       if (supplie instanceof Error) {
         throw new BadRequestException(supplie.message, {
@@ -54,9 +53,19 @@ export class PrismaSupplierRepository implements SupplieRepository {
   }
 
   async getSupplieById(id: string): Promise<any> {
-    return await this.prisma.supplier.findUnique({
+    try{
+    const supplie = await this.prisma.supplier.findUnique({
       where: { id },
     });
+
+    if(!supplie?.id){
+     return []
+    }
+   return supplie
+  
+  }catch(error:any){
+      throw new BadRequestException('Fornecedor não encontrado!')
+    }
   }
 
   async updateSupplie(id: string, supplie: any): Promise<any> {
@@ -75,8 +84,12 @@ export class PrismaSupplierRepository implements SupplieRepository {
   }
 
   async deleteSupplie(id: string): Promise<any> {
-    return await this.prisma.supplier.delete({
-      where: { id },
-    });
+    try {
+      return await this.prisma.supplier.delete({
+        where: { id },
+      });
+    } catch (error: any) {
+      throw new BadRequestException("Erro ao deletar fornecedor!");
+    }
   }
 }
