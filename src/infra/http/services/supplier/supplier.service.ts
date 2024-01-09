@@ -3,25 +3,25 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SupplieService {
-  constructor(private productRepository: SupplieRepository) {}
+  constructor(private supplieRepository: SupplieRepository) {}
 
   async findSupplier(): Promise<any[]> {
-    return await this.productRepository.getSupplier();
+    return await this.supplieRepository.getSupplier();
   }
 
   async findSupplieById(id: string): Promise<any> {
-    return await this.productRepository.getSupplieById(id);
+    return await this.supplieRepository.getSupplieById(id);
   }
 
-  async create(product: any): Promise<any> {
-    return await this.productRepository.createSupplie(product);
+  async create(supplie: any): Promise<any> {
+    return await this.supplieRepository.createSupplie(supplie);
   }
 
-  async updateSupplie(id: string, product: any): Promise<any> {
-    return await this.productRepository.updateSupplie(id, product);
+  async updateSupplie(id: string, supplie: any): Promise<any> {
+    return await this.supplieRepository.updateSupplie(id, supplie);
   }
 
   async deleteSupplie(id: string): Promise<any> {
-    return await this.productRepository.deleteSupplie(id);
+    return await this.supplieRepository.deleteSupplie(id);
   }
 }
