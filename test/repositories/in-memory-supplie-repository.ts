@@ -1,39 +1,40 @@
-import { SupplieRepository } from "@app/repositories/Supplie/supplie";
+import { SupplieRepository } from '@app/repositories/Supplie/supplie';
 
+export class inMemorySupplierRepository implements SupplieRepository {
+  supplies: any[] = [];
 
-export class inMemorySupplierRepository implements SupplieRepository{
-     supplies: any[] = [];
+  async createSupplie(supplie: any): Promise<any> {
+    this.supplies.push(supplie);
+    if (supplie instanceof Error) {
+      throw new Error(supplie.message);
+    }
+    return supplie;
+  }
 
-     async createSupplie(supplie: any): Promise<any> {
-          this.supplies.push(supplie);
-          if (supplie instanceof Error) {
-               throw new Error(supplie.message);
-          }
-          return supplie;
-     }
+  async getSupplier(): Promise<any[]> {
+    return this.supplies;
+  }
 
-     async getSupplier(): Promise<any[]> {
-          return this.supplies;
-     }
+  async getSupplieById(id: string): Promise<any> {
+    if (!id) {
+      throw new Error('Id não informado');
+    }
+    return this.supplies.find((supplie) => supplie.id === id);
+  }
 
-     async getSupplieById(id: string): Promise<any> {
-          if (!id) {
-               throw new Error("Id não informado");
-          }
-          return this.supplies.find((supplie) => supplie.id === id);
-     }
+  async updateSupplie(id: string, supplie: any): Promise<any> {
+    const index = this.supplies.findIndex((supplie) => supplie.id === id);
+    this.supplies[index] = supplie;
+    return supplie;
+  }
 
-     async updateSupplie(id: string, supplie: any): Promise<any> {
-          const index = this.supplies.findIndex((supplie) => supplie.id === id);
-          this.supplies[index] = supplie;
-          return supplie;
-     }
+  async deleteSupplie(id: string): Promise<any> {
+    const index = this.supplies.findIndex((supplie) => supplie.id === id);
+    if (index === -1) {
+      throw new Error('Id não encontrado');
+    }
 
-     async deleteSupplie(id: string): Promise<any> {
-          const index = this.supplies.findIndex((supplie) => supplie.id === id);
-          this.supplies.splice(index, 1);
-          return true;
-     }
-
-     
+    this.supplies.splice(index, 1);
+    return true;
+  }
 }
