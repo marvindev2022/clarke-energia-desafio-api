@@ -14,41 +14,43 @@ import {
 
 @Controller('supplier')
 export class SupplieController {
-  constructor(private productService: SupplieService) {}
+  constructor(private supplieService: SupplieService) {}
 
   @Post('create')
   async create(@Body() createSupplieDTO: createSupplieDTO) {
-    const supplie = await this.productService.create(createSupplieDTO);
-    if (supplie instanceof Error) throw new BadRequestException(supplie.message);
+    const supplie = await this.supplieService.create(createSupplieDTO);
+    if (supplie instanceof Error)
+      throw new BadRequestException(supplie.message);
 
     return { message: 'Produto cadastrado com sucesso!' };
   }
 
   @Get(':id/find')
   async findSupplieById(@Param('id') id: string) {
-    const product = await this.productService.findSupplieById(id);
+    const supplie = await this.supplieService.findSupplieById(id);
 
-    return product;
+    return supplie;
   }
 
   @Get('find')
   async findSupplier() {
-    const supplies = await this.productService.findSupplier();
+    const supplies = await this.supplieService.findSupplier();
 
     return supplies;
   }
 
   @Put(':id/edit')
   async edit(@Param('id') id: string, @Body() editSupplieDTO: EditSupplieDTO) {
-    const product = await this.productService.updateSupplie(id, editSupplieDTO);
+    const supplie = await this.supplieService.updateSupplie(id, editSupplieDTO);
 
-    return product;
+    return supplie;
   }
 
   @Delete(':id/delete')
   async delete(@Param('id') id: string) {
-    const product = await this.productService.deleteSupplie(id);
-   if (product instanceof Error) throw new BadRequestException("Erro ao deletar produto!");
-    return "Produto deletado com sucesso!"
+    const supplie = await this.supplieService.deleteSupplie(id);
+    if (supplie instanceof Error)
+      throw new BadRequestException('Erro ao deletar produto!');
+    return 'Produto deletado com sucesso!';
   }
 }
