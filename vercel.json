@@ -1,7 +1,8 @@
 {
     "version": 2,
+    "name": "Clarke api",
     "builds": [
-      { "src": "dist/src/*", "use": "@vercel/node" }
+      { "src": "dist/src/main.js", "use": "@vercel/node" }
     ],
     "routes": [
       { "src": "/(.*)", "dest": "dist/src/main.js" }
