@@ -16,8 +16,8 @@ A API de Fornecedores de Energia é parte integrante do projeto "Consumo de ener
 
 ## Deploy e URLs
 
-- **Backend (API):** [https://desafio-clarke-energia-backend-3ueh.vercel.app/](https://desafio-clarke-energia-backend-3ueh.vercel.app/)
-- **Documentação OpenAPI (Swagger):** [Link para o Swagger](inserir-link-do-swagger-aqui)
+- **Backend (API):** [Deploy API](https://desafio-clarke-energia-backend-3ueh.vercel.app/)
+- **Documentação OpenAPI (Swagger):** [Link para o Swagger](https://app.swaggerhub.com/apis-docs/MVRFULLSTACKDEV/Clarke-api/1.0.0)
 
 ## Como Rodar o Projeto Localmente
 
