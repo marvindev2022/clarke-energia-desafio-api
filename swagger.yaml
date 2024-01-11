@@ -4,8 +4,16 @@ info:
   title: Clarke Energia API Fornecedores
   description: API for managing suppliers
 
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/MVRFULLSTACKDEV/Clarke-api/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: http://localhost:3000
+  - description: Link Render
+    url: https://desafio-clarke-energia-backend-3ueh.vercel.app/
 paths:
-  /supplies:
+  /supplier:
     post:
       summary: Create a new supplier
       requestBody:
@@ -24,7 +32,7 @@ paths:
         '400':
           description: Invalid parameters provided
 
-  /supplies/{id}:
+  /supplier/{id}/find:
     get:
       summary: Get a supplier by ID
       parameters:
@@ -43,7 +51,23 @@ paths:
                 $ref: '#/components/schemas/SupplieProps'
         '404':
           description: Supplier not found
+          
+  /supplier/find:
+    get:
+      summary: Get all supplier
+      responses:
+        '200':
+          description: Successfully retrieved all suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SupplieProps'
+        '404':
+          description: No suppliers found        
 
+  /supplier/{id}/edit:
     put:
       summary: Update a supplier by ID
       parameters:
@@ -70,7 +94,7 @@ paths:
           description: Invalid parameters provided
         '404':
           description: Supplier not found
-
+  /supplier/{id}/delete:
     delete:
       summary: Delete a supplier by ID
       parameters:
