@@ -6,3 +6,4 @@ export class InvalidParamError extends BadRequestException {
     this.name = 'InvalidParamsError';
   }
 }
+

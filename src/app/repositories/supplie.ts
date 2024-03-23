@@ -11,3 +11,5 @@ export abstract class SupplieRepository {
   ): Promise<EditSupplieDTO>;
   abstract deleteSupplie(id: string): Promise<string>;
 }
+
+/*gatewares*/
